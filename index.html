@@ -3,9 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Sistema de Gestión</title>
 </head>
 <body>
-    
+    <nav aria-label="Sistema de Gestión de Reservas y Tareas">
+        <a href="#reservas">Reservas</a>
+        <a href="#tareas">Tareas</a>
+    </nav>
+      <section id="reservas">
+        <article class="reserva-card">
+            <time datetime="2025-03-26T20:15">26 Marzo 2025, 20:15</time>
+            <p>Carolina Mendoza</p>
+        </article>
+        <article class="reserva-card">
+            <time datetime="2025-03-28T18:30">28 Marzo 2025, 18:30</time>
+            <p>Ernesto García</p>
+        </article>
+        <article class="reserva-card">
+            <time datetime="2025-03-29T22:15">29 Marzo 2025, 22:15</time>
+            <p>María López</p>
+        </article>
+      </section>
+      <aside class="estadisticas">
+        <h2>Ocupación Horaria</h2>
+        <meter value="0.6" min="0" max="1">60%</meter>
+        <p>La ocupación horaria actual es del 60%</p>
+        <ul>
+            <li><strong>0-20%</strong>: Baja ocupación</li>
+            <li><strong>21-50%</strong>: Ocupación moderada</li>
+            <li><strong>51-80%</strong>: Alta ocupación</li>
+            <li><strong>81-100%</strong>: Ocupación completa</li>
+        </ul>
+    </aside>
+    <section id="tareas">
+        <h2>Tareas</h2>
+        <article class="tarea-card">
+            <h3>Desarrollar el archivo HTML</h3>
+            <progress value="75" max="100"></progress>
+            <button onclick="document.getElementById('detalle-tarea-1').showModal()">Ver Detalles</button>
+            <dialog id="detalle-tarea-1">
+                <h3>Detalles</h3>
+                <p>José Pérez</p>
+                <p>Fecha límite: 2025-12-01</p>
+                <p>Prioridad: <meter value="0.8" min="0" max="1">Alta</meter></p>
+                <button onclick="document.getElementById('detalle-tarea-1').close()">Cerrar</button>
+            </dialog>
+        </article>
+        <article class="tarea-card">
+            <h3>Desarrollar el archivo CSS</h3>
+            <progress value="50" max="100"></progress>
+            <button onclick="document.getElementById('detalle-tarea-2').showModal()">Ver Detalles</button>
+            <dialog id="detalle-tarea-2">
+                <h3>Detalles</h3>
+                <p>Descripción extendida de la tarea 2.</p>
+                <p>Fecha límite: 2023-11-15</p>
+                <p>Prioridad: <meter value="0.5" min="0" max="1">Media</meter></p>
+                <button onclick="document.getElementById('detalle-tarea-2').close()">Cerrar</button>
+            </dialog>
+        </article>
+        <article class="tarea-card">
+            <h3>Desarrollar el archivo JS</h3>
+            <progress value="25" max="100"></progress>
+            <button onclick="document.getElementById('detalle-tarea-3').showModal()">Ver Detalles</button>
+            <dialog id="detalle-tarea-3">
+                <h3>Detalles</h3>
+                <p>Descripción extendida de la tarea 3.</p>
+                <p>Fecha límite: 2023-10-30</p>
+                <p>Prioridad: <meter value="0.3" min="0" max="1">Baja</meter></p>
+                <button onclick="document.getElementById('detalle-tarea-3').close()">Cerrar</button>
+            </dialog>
+        </article>
+    </section>
 </body>
 </html>
