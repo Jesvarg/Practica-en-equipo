@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         dateInput.setAttribute('min', today);
     }
 
+    const cargarDatos = () => {  
+        return JSON.parse(localStorage.getItem('tareas')) || [];  
+    }
+
     const tareaForm = document.getElementById('tarea-form');
     tareaForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -27,7 +31,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         tareaForm.reset();
         alert('Tarea guardada en correctamente');
+  
+
+
+
     });
+
 
     const reservaForm = document.getElementById('reserva-form');
     const fechaInput = document.getElementById('fecha');
@@ -58,5 +67,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
         reservaForm.reset();
         alert('Reserva guardada correctamente');
     });
+
+    function displayLocalStorageData() {
+        const dataContainer = document.getElementById('data-tareas');
+        dataContainer.innerHTML = ''; // Clear previous content
+    
+        // Loop through localStorage and display each item
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const value = localStorage.getItem(key);
+            const item = document.createElement('div');
+            item.textContent = `${key}: ${value}`;
+            dataContainer.appendChild(item);
+        }
+    }
+    
+    // Call the function to display data
+    displayLocalStorageData();
 
 });
