@@ -5,10 +5,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         dateInput.setAttribute('min', today);
     }
 
-    const cargarDatos = () => {  
-        return JSON.parse(localStorage.getItem('tareas')) || [];  
-    }
-
     const tareaForm = document.getElementById('tarea-form');
     tareaForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -30,13 +26,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         localStorage.setItem('tareas', JSON.stringify(tareas));
 
         tareaForm.reset();
-        alert('Tarea guardada en correctamente');
-  
-
-
-
+        alert('Tarea guardada correctamente');
     });
-
 
     const reservaForm = document.getElementById('reserva-form');
     const fechaInput = document.getElementById('fecha');
@@ -68,21 +59,60 @@ document.addEventListener('DOMContentLoaded', (event) => {
         alert('Reserva guardada correctamente');
     });
 
-    function displayLocalStorageData() {
-        const dataContainer = document.getElementById('data-tareas');
-        dataContainer.innerHTML = ''; // Clear previous content
-    
-        // Loop through localStorage and display each item
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            const value = localStorage.getItem(key);
+    // Función para mostrar reservas en el modal
+    const mostrarReservas = () => {
+        const reservas = JSON.parse(localStorage.getItem('reservas')) || [];
+        const modalReservas = document.getElementById('reservas-modal');
+        const listaReservas = document.getElementById('reservas-list');
+        
+        listaReservas.innerHTML = '';
+        reservas.forEach((reserva, index) => {
             const item = document.createElement('div');
-            item.textContent = `${key}: ${value}`;
-            dataContainer.appendChild(item);
-        }
-    }
-    
-    // Call the function to display data
-    displayLocalStorageData();
+            item.innerHTML = `
+                <h3>Reserva ${index + 1}</h3>
+                <p>Nombre: ${reserva.nombre}</p>
+                <p>Telefono: ${reserva.telefono}</p>
+                <p>Fecha: ${reserva.fecha}</p>
+                <p>Personas: ${reserva.personas}</p>
+                <hr>
+            `;
+            listaReservas.appendChild(item);
+        });
+        modalReservas.open = true;
+    };
 
+    // Función para mostrar tareas en el modal
+    const mostrarTareas = () => {
+        const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+        const modalTareas = document.getElementById('tareas-modal');
+        const listaTareas = document.getElementById('tareas-list');
+        
+        listaTareas.innerHTML = '';
+        tareas.forEach((tarea, index) => {
+            const item = document.createElement('div');
+            item.innerHTML = `
+                <h3>Tarea ${index + 1}</h3>
+                <p>Título: ${tarea.titulo}</p>
+                <p>Descripción: ${tarea.descripcion}</p>
+                <p>Fecha límite: ${tarea.fechaLimite}</p>
+                <p>Prioridad: ${tarea.prioridad}</p>
+                <hr>
+            `;
+            listaTareas.appendChild(item);
+        });
+        modalTareas.open = true;
+    };
+
+    // Event listeners para los botones de ver
+    document.getElementById('ver-reservas-modal').addEventListener('click', mostrarReservas);
+    document.getElementById('ver-tareas-modal').addEventListener('click', mostrarTareas);
+
+    // Event listeners para cerrar los modales
+    document.getElementById('close-reservas-modal').addEventListener('click', () => {
+        document.getElementById('reservas-modal').open = false;
+    });
+
+    document.getElementById('close-tareas-modal').addEventListener('click', () => {
+        document.getElementById('tareas-modal').open = false;
+    });
 });
